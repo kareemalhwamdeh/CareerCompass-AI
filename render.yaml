@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: career-compass-ai
+    runtime: node
+    plan: free
+    buildCommand: npm install && ./setup-frontend.sh && ./build-frontend.sh
+    startCommand: NODE_ENV=production node src/backend/server.js
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: API_KEY
+        sync: false
+    autoDeploy: true

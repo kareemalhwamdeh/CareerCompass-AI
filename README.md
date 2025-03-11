@@ -55,6 +55,29 @@ A web-based application that helps job seekers improve their resumes and prepare
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:3001/api
 
+## Deployment
+
+### Deploying to Render.com (Free)
+
+1. Fork this repository to your GitHub account.
+
+2. Sign up for a free [Render.com](https://render.com/) account.
+
+3. Create a new Web Service:
+   - Connect your GitHub repository
+   - Use the following settings:
+     - **Name**: career-compass-ai (or your preferred name)
+     - **Environment**: Node
+     - **Build Command**: `npm install && ./setup-frontend.sh && ./build-frontend.sh`
+     - **Start Command**: `NODE_ENV=production node src/backend/server.js`
+
+4. Add environment variables:
+   - Add `API_KEY` with your actual API key value
+
+5. Deploy the service.
+
+6. Once deployed, your application will be accessible at `https://your-app-name.onrender.com`
+
 ## Roadmap
 
 - Implement user authentication
@@ -62,5 +85,4 @@ A web-based application that helps job seekers improve their resumes and prepare
 - Support PDF resume uploads with text extraction
 - Add voice-enabled mock interviews with real-time speech recognition
 - Implement AI-generated resume builder
-- Add integration with job search APIs// Repository update
-// Removed API docs
+- Add integration with job search APIs

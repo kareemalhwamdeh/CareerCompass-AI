@@ -7,6 +7,7 @@
     "start": "node src/backend/server.js",
     "dev": "nodemon src/backend/server.js",
     "setup-frontend": "./setup-frontend.sh",
+    "build-frontend": "./build-frontend.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

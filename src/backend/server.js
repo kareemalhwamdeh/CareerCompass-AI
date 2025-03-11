@@ -20,11 +20,13 @@ app.use('/api', routes);
 
 // Serve static files from the React build folder in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../../build')));
+  const frontendBuildPath = path.join(__dirname, '../../build');
+  console.log(`Serving static files from: ${frontendBuildPath}`);
+  app.use(express.static(frontendBuildPath));
 
   // Handle any requests that don't match the API routes
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../build', 'index.html'));
+    res.sendFile(path.join(frontendBuildPath, 'index.html'));
   });
 } else {
   // In development, provide a simple route for testing
