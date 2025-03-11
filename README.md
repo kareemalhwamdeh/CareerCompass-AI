@@ -62,4 +62,4 @@ A web-based application that helps job seekers improve their resumes and prepare
 - Support PDF resume uploads with text extraction
 - Add voice-enabled mock interviews with real-time speech recognition
 - Implement AI-generated resume builder
-- Add integration with job search APIs
+- Add integration with job search APIs// Repository update
