@@ -21,7 +21,7 @@ Create a `.env` file in the project root directory with the following contents:
 
 ```
 PORT=3001
-CLAUDE_API_KEY=your_claude_api_key_here
+API_KEY=your_api_key_here
 ```
 
 ## Step 3: Run the backend server

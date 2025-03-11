@@ -77,7 +77,7 @@ async function callNLPAPI(params) {
     }
     
     const response = await axios.post('https://api.example.com/v1/messages', {
-      model: "llm-model-latest",
+      model: "text-processing-model",
       max_tokens: params.max_tokens || 1000,
       messages: [
         {
@@ -108,7 +108,7 @@ async function callNLPAPI(params) {
  */
 function createResumeAnalysisPrompt(resumeText, jobDescription) {
   return `
-You are an expert resume reviewer with years of experience in helping job seekers improve their resumes.
+As an expert resume reviewer with years of experience in helping job seekers improve their resumes.
 Please analyze the following resume ${jobDescription ? 'for a role described as: ' + jobDescription : ''}:
 
 ${resumeText}
@@ -161,7 +161,7 @@ Generate 8-10 mixed interview questions including:
   }
   
   return `
-You are an expert technical interviewer with experience in conducting interviews for tech companies.
+As an expert technical interviewer with experience in conducting interviews for tech companies.
 Based on the following resume and job description, generate appropriate interview questions.
 
 Resume:
@@ -189,8 +189,8 @@ For each question, provide:
  */
 function createMockInterviewPrompt(resumeText, jobDescription, userResponse, questionContext) {
   return `
-You are an expert technical interviewer with experience in conducting interviews for tech companies.
-You're providing feedback on a candidate's response to an interview question.
+As an expert technical interviewer with experience in conducting interviews for tech companies.
+Providing feedback on a candidate's response to an interview question.
 
 Resume:
 ${resumeText}
