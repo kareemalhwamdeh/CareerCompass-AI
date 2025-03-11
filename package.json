@@ -1,0 +1,48 @@
+{
+  "name": "resume-interview-prep",
+  "version": "1.0.0",
+  "description": "Advanced resume enhancement and interview preparation tool",
+  "main": "src/backend/server.js",
+  "scripts": {
+    "start": "node src/backend/server.js",
+    "dev": "nodemon src/backend/server.js",
+    "setup-frontend": "./setup-frontend.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kareemalhwamdeh/Resume-Interview-Prep.git"
+  },
+  "keywords": [
+    "resume",
+    "interview",
+    "ai",
+    "claude",
+    "career",
+    "job-search"
+  ],
+  "author": "Kareem Alhwamdeh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kareemalhwamdeh/Resume-Interview-Prep/issues"
+  },
+  "homepage": ".",
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.7",
+    "@mui/material": "^6.4.7",
+    "axios": "^1.8.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.3.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.2",
+    "react-scripts": "^5.0.1"
+  }
+}
