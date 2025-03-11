@@ -220,4 +220,4 @@ module.exports = {
   analyzeResume,
   generateInterviewQuestions,
   conductMockInterview
-};
+};// API integration
