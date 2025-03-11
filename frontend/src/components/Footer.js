@@ -18,9 +18,17 @@ function Footer() {
           {new Date().getFullYear()}
           {' '}
           <Link color="inherit" href="/">
-            Resume & Interview Prep Tool
+            CareerCompass AI
           </Link>
-          {' - All rights reserved.'}
+          {' - All rights reserved to Kareem Alhwamdeh.'}
+        </Typography>
+        <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
+          <Link color="inherit" href="https://github.com/kareemalhwamdeh">
+            GitHub
+          </Link>{' | '}
+          <Link color="inherit" href="https://www.linkedin.com/in/kareem-alhwamdeh/">
+            LinkedIn
+          </Link>
         </Typography>
       </Container>
     </Box>
