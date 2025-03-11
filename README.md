@@ -1,4 +1,5 @@
 # CareerCompass AI
+### Author: Kareem Alhwamdeh
 
 A web-based application that helps job seekers improve their resumes and prepare for technical and behavioral interviews using advanced NLP techniques.
 

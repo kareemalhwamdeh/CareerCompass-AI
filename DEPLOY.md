@@ -1,4 +1,5 @@
 # Deployment Guide
+### Author: Kareem Alhwamdeh
 
 This document provides step-by-step instructions for deploying the CareerCompass AI application using Render.com's free hosting service.
 

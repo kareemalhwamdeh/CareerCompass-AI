@@ -1,4 +1,5 @@
 # API Documentation
+### Author: Kareem Alhwamdeh
 
 ## Base URL
 

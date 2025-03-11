@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# CareerCompass AI Frontend
+### Author: Kareem Alhwamdeh
+
+Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
