@@ -1,4 +1,5 @@
 const axios = require('axios');
+const config = require('../config/config');
 
 /**
  * Analyze a resume using AI
@@ -71,7 +72,7 @@ async function conductMockInterview(resumeText, jobDescription, userResponse, qu
 async function callNLPAPI(params) {
   try {
     // API integration
-    const apiKey = process.env.API_KEY;
+    const apiKey = config.apiKey;
     if (!apiKey) {
       throw new Error('API_KEY not found in environment variables');
     }

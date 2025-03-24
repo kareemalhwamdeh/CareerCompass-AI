@@ -1,43 +1,40 @@
-# AI Resume & Interview Prep Tool - Architecture
+# CareerCompass AI - Project Architecture
 ### Author: Kareem Alhwamdeh
 
 ## System Overview
 
-The AI Resume & Interview Prep Tool is designed as a modern web application with a clear separation between the frontend and backend components.
+CareerCompass AI is a modern web application with a clear separation between the frontend and backend components.
 
 ```
-                                                               
-                                                               
-  React Frontend      Express Backend      NLP API    
-                                                               
-                                                               
-                                 |
-                                 |
-                                 v
-                                          
-                                          
-                             Database     
-                            (Planned)     
-                                          
-                                          
+  +----------------+   +----------------+   +--------------+
+  |                |   |                |   |              |
+  |  React Client  |-->| Express Server |-->|   NLP API    |
+  |                |<--|                |<--|              |
+  +----------------+   +----------------+   +--------------+
+                              |
+                              v
+                       +----------------+
+                       |                |
+                       |    Database    |
+                       |   (Planned)    |
+                       |                |
+                       +----------------+
 ```
 
 ## Component Details
 
-### Backend (Node.js/Express)
+### Server (Node.js/Express)
 
 - **server.js**: Entry point for the application, configures Express
-- **routes.js**: Defines API endpoints and routing logic
-- **nlpAPI.js**: Handles communication with NLP processing API
+- **controllers/routes.js**: Defines API endpoints and routing logic
+- **utils/nlpAPI.js**: Handles communication with NLP processing API
 - **models/**: Database models (planned)
 
-### Frontend (React.js, planned)
+### Client (React.js)
 
-- **Components/**: Reusable UI components
-- **Pages/**: Page-level components
-- **Hooks/**: Custom React hooks
-- **Services/**: API communication services
-- **Context/**: State management
+- **components/**: Reusable UI components (Navbar, Footer, etc.)
+- **pages/**: Page-level components (Resume, Interview, Dashboard)
+- **services/**: API communication with the backend (planned)
 
 ### Database (Planned)
 
@@ -48,16 +45,16 @@ The AI Resume & Interview Prep Tool is designed as a modern web application with
 
 ## Data Flow
 
-1. User submits resume or interview response via frontend
-2. Frontend sends request to Express backend
-3. Backend processes request and calls NLP API
+1. User submits resume or interview response via client
+2. Client sends request to Express server
+3. Server processes request and calls NLP API
 4. NLP processing analyzes the content and returns insights
-5. Backend formats the response and sends it back to frontend
-6. Frontend displays results to the user
+5. Server formats the response and sends it back to client
+6. Client displays results to the user
 
 ## Authentication Flow (Planned)
 
-1. User registers/logs in via frontend
+1. User registers/logs in via client
 2. Authentication service verifies credentials
 3. JWT token issued to authenticated users
 4. Token used for subsequent API requests

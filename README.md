@@ -3,6 +3,21 @@
 
 A web-based application that helps job seekers improve their resumes and prepare for technical and behavioral interviews using advanced NLP techniques.
 
+## Project Structure
+```
+/
+├── client/             # React frontend application
+│   ├── public/         # Static assets
+│   └── src/            # Frontend source code
+│       ├── components/ # Reusable UI components
+│       └── pages/      # Application pages
+├── server/             # Node.js backend API
+│   ├── controllers/    # Route controllers
+│   ├── models/         # Data models
+│   └── utils/          # Utility functions
+└── docs/               # Project documentation
+```
+
 ## Features
 
 - **Resume Analysis**: Detailed feedback on structure, clarity, and ATS optimization

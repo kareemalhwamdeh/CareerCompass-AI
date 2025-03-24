@@ -1,70 +1,162 @@
-# Deployment Guide
-### Author: Kareem Alhwamdeh
+# CareerCompass AI - Deployment Guide
 
-This document provides step-by-step instructions for deploying the CareerCompass AI application using Render.com's free hosting service.
+This guide covers different options for deploying the CareerCompass AI application.
 
-## Deploying to Render.com
+## Option 1: Traditional VPS/Dedicated Server
 
-1. **Fork or Clone the Repository**
-   - Fork this repository to your GitHub account
-   - Alternatively, you can push your local copy to your own GitHub repository
+### Prerequisites
+- A server running Linux (Ubuntu 20.04+ recommended)
+- Node.js 16+ installed
+- Nginx or Apache for reverse proxy
+- (Optional) PM2 for process management
 
-2. **Create a Render.com Account**
-   - Sign up for a free account at [render.com](https://render.com)
-   - Verify your email address
+### Setup Steps
 
-3. **Connect GitHub to Render**
-   - In your Render dashboard, click "New +"
-   - Select "Web Service" 
-   - Connect your GitHub account
-   - Find and select your forked/cloned repository
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/CareerCompass-AI.git
+cd CareerCompass-AI
+```
 
-4. **Configure Service Settings**
-   - **Name**: career-compass-ai (or your preferred name)
-   - **Environment**: Node
-   - **Region**: Choose closest to your location
-   - **Branch**: main (or your preferred branch)
-   - **Build Command**: `npm install && ./setup-frontend.sh && ./build-frontend.sh`
-   - **Start Command**: `NODE_ENV=production node src/backend/server.js`
-   - **Plan**: Free
+2. Install dependencies:
+```bash
+npm install
+cd client
+npm install
+cd ..
+```
 
-5. **Set Environment Variables**
-   - Scroll down to "Environment Variables"
-   - Add the following key-value pair:
-     - Key: `API_KEY`
-     - Value: Your actual API key for the AI service
-   - Optional: Add any other environment variables needed
+3. Create and configure .env file:
+```bash
+cp .env.example .env
+# Edit .env with your production settings
+```
 
-6. **Deploy the Service**
-   - Click "Create Web Service"
-   - Wait for the deployment process to complete (this may take a few minutes)
+4. Build the client:
+```bash
+npm run build
+```
 
-7. **Access Your Deployed Application**
-   - Once the deployment is successful, you'll be provided a URL (e.g., `https://career-compass-ai.onrender.com`)
-   - Click on the URL to access your deployed application
+5. Install PM2 (optional but recommended):
+```bash
+npm install -g pm2
+```
 
-## Updating Your Deployment
+6. Start the application with PM2:
+```bash
+pm2 start server/server.js --name "careercompass"
+pm2 save
+pm2 startup
+```
 
-When you make changes to your code:
+7. Configure Nginx as a reverse proxy:
+```nginx
+server {
+    listen 80;
+    server_name yourdomainname.com;
 
-1. Push your changes to your GitHub repository
-2. Render will automatically detect the changes and deploy the updated version
+    location / {
+        proxy_pass http://localhost:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
 
-## Troubleshooting
+8. Enable HTTPS with Certbot/Let's Encrypt:
+```bash
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d yourdomainname.com
+```
 
-If you encounter issues with your deployment:
+## Option 2: Docker Deployment
 
-1. Check the Render logs for error messages
-2. Ensure your environment variables are set correctly
-3. Verify your build and start commands are correct
-4. Check that your file paths are properly configured
+### Prerequisites
+- Docker and Docker Compose installed
 
-## Limitations of Free Tier
+### Setup Steps
 
-The free tier of Render.com has some limitations:
+1. Create a Dockerfile in the project root:
+```dockerfile
+FROM node:16-alpine
 
-- The service will spin down after 15 minutes of inactivity
-- The first request after inactivity may take a few seconds to respond
-- Limited computing resources and bandwidth
+WORKDIR /app
 
-For a production application, consider upgrading to a paid plan for improved reliability and performance.
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN cd client && npm install && npm run build
+
+EXPOSE 3001
+
+CMD ["npm", "start"]
+```
+
+2. Create a docker-compose.yml file:
+```yaml
+version: '3'
+services:
+  careercompass:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - API_KEY=your_api_key_here
+    restart: always
+```
+
+3. Build and start the container:
+```bash
+docker-compose up -d
+```
+
+## Option 3: Platform as a Service (Render/Heroku/Vercel)
+
+### Render Deployment
+
+1. Create a render.yaml file in the project root:
+```yaml
+services:
+  - name: careercompass
+    type: web
+    env: node
+    buildCommand: npm install && cd client && npm install && npm run build && cd ..
+    startCommand: node server/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: API_KEY
+        sync: false
+```
+
+2. Configure the application on Render:
+   - Connect your GitHub repository
+   - Configure environment variables
+   - Deploy the application
+
+### Heroku Deployment
+
+1. Create a Procfile in the project root:
+```
+web: npm start
+```
+
+2. Deploy to Heroku:
+```bash
+heroku create careercompass-ai
+git push heroku main
+heroku config:set API_KEY=your_api_key_here
+```
+
+## Maintenance and Monitoring
+
+- Set up application monitoring with tools like New Relic or Datadog
+- Configure regular backups if you're using a database
+- Set up automated security updates for your server
+- Implement logging with tools like Winston or Bunyan

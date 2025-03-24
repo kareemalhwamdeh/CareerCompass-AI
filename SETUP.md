@@ -1,61 +1,98 @@
-# Setup Instructions
-
-Follow these simple steps to set up and run the Resume & Interview Prep application:
+# CareerCompass AI - Setup Guide
 
 ## Prerequisites
 
-- Node.js (v16 or later)
-- npm (v8 or later)
+- Node.js (v16 or higher)
+- npm (v8 or higher)
 
-## Step 1: Install backend dependencies
+## Installation
 
-Run the following command in the project root directory:
+### Clone the repository
 
 ```bash
+git clone https://github.com/your-username/CareerCompass-AI.git
+cd CareerCompass-AI
+```
+
+### Install dependencies
+
+```bash
+# Install server dependencies
 npm install
+
+# Install client dependencies
+cd client
+npm install
+cd ..
 ```
 
-## Step 2: Set up environment variables
+### Environment Setup
 
-Create a `.env` file in the project root directory with the following contents:
+1. Create a `.env` file in the root directory using the provided example:
+
+```bash
+cp .env.example .env
+```
+
+2. Edit the `.env` file and add your API key:
 
 ```
-PORT=3001
 API_KEY=your_api_key_here
 ```
 
-## Step 3: Run the backend server
+## Running the Application
 
-Start the backend server with:
+### Development Mode
+
+To run both the client and server in development mode:
 
 ```bash
 npm run dev
 ```
 
-The backend will start on http://localhost:3001
+This will start:
+- The backend server at http://localhost:3001
+- The frontend React app at http://localhost:3000
 
-## Step 4: Set up and run the frontend
-
-In a new terminal window, run:
+### Running Server Only
 
 ```bash
-npm run setup-frontend
-cd frontend
+npm run server
+```
+
+### Running Client Only
+
+```bash
+npm run client
+```
+
+## Building for Production
+
+To build the client application for production:
+
+```bash
+npm run build
+```
+
+To run the production version:
+
+```bash
 npm start
 ```
 
-The frontend will start on http://localhost:3000
+## API Testing
 
-## Accessing the application
+The API endpoints can be tested using tools like Postman or curl:
 
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:3001/api
+```bash
+# Example: Test the resume analysis endpoint
+curl -X POST http://localhost:3001/api/analyze-resume \
+  -H "Content-Type: application/json" \
+  -d '{"resumeText": "Your resume text here", "jobDescription": "Optional job description"}'
+```
 
 ## Troubleshooting
 
-If you encounter any issues:
-
-1. Make sure both terminals are running (one for backend, one for frontend)
-2. Check that the backend is running on port 3001
-3. Verify that the frontend is running on port 3000
-4. Ensure all dependencies are installed correctly
+- If you encounter CORS issues, check that your `.env` file has the correct CORS_ORIGINS setting
+- If API calls fail, verify that your API_KEY is correctly set in the `.env` file
+- For client connection issues, ensure the server is running on port 3001

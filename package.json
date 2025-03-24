@@ -1,13 +1,14 @@
 {
-  "name": "resume-interview-prep",
+  "name": "careercompass-ai",
   "version": "1.0.0",
   "description": "Advanced resume enhancement and interview preparation tool",
-  "main": "src/backend/server.js",
+  "main": "server/server.js",
   "scripts": {
-    "start": "node src/backend/server.js",
-    "dev": "nodemon src/backend/server.js",
-    "setup-frontend": "./setup-frontend.sh",
-    "build-frontend": "./build-frontend.sh",
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "cd client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,21 +30,13 @@
   },
   "homepage": ".",
   "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.4.7",
-    "@mui/material": "^6.4.7",
     "axios": "^1.8.2",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.3.0"
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
-    "nodemon": "^3.1.2",
-    "react-scripts": "^5.0.1"
+    "nodemon": "^3.1.2"
   }
 }

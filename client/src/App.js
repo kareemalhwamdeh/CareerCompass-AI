@@ -34,7 +34,7 @@ function Home() {
     <Container maxWidth="lg" sx={{ mt: 4 }}>
       <Paper elevation={3} sx={{ p: 4, textAlign: 'center' }}>
         <Typography variant="h3" component="h1" gutterBottom>
-          Resume & Interview Prep
+          CareerCompass AI
         </Typography>
         <Typography variant="h5" color="text.secondary" paragraph>
           Boost your job search with AI-powered tools
@@ -91,4 +91,4 @@ function App() {
   );
 }
 
-export default App;// UI improvements
+export default App;

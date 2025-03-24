@@ -1,27 +1,19 @@
-# API Documentation
+# CareerCompass AI - API Documentation
 ### Author: Kareem Alhwamdeh
 
 ## Base URL
 
-All API endpoints are relative to: `https://your-api-domain.com/api/`
+All API endpoints are relative to: `/api`
 
-For local development: `http://localhost:3000/api/`
+For local development: `http://localhost:3001/api`
 
 ## Authentication (Planned)
 
-Most endpoints will require authentication using a JWT token.
-
-Include the token in the Authorization header:
-
-```
-Authorization: Bearer <your_token>
-```
+Authentication will be implemented in a future release. Currently, all endpoints are publicly accessible.
 
 ## Endpoints
 
 ### Resume Analysis
-
-#### Analyze Resume
 
 ```
 POST /analyze-resume
@@ -33,8 +25,8 @@ Analyzes a resume and provides structured feedback.
 
 ```json
 {
-  "resumeText": "Full text of the resume...",
-  "jobDescription": "Optional job description for tailored feedback..."
+  "resumeText": "Full text of the resume (required)",
+  "jobDescription": "Optional job description for tailored feedback"
 }
 ```
 
@@ -42,7 +34,13 @@ Analyzes a resume and provides structured feedback.
 
 ```json
 {
-  "analysis": "Detailed analysis of the resume with structured feedback..."
+  "analysis": {
+    "score": 75,
+    "strengths": ["Good use of action verbs", "Clear presentation of skills"],
+    "improvements": ["Add more quantifiable achievements"],
+    "keywordMatches": 65,
+    "recommendedSkills": ["Project Management", "Data Analysis"]
+  }
 }
 ```
 
@@ -52,9 +50,7 @@ Analyzes a resume and provides structured feedback.
 - `400 Bad Request`: Missing required fields
 - `500 Internal Server Error`: Error processing request
 
-### Interview Preparation
-
-#### Generate Interview Questions
+### Generate Interview Questions
 
 ```
 POST /generate-questions
@@ -66,9 +62,9 @@ Generates tailored interview questions based on the resume and job description.
 
 ```json
 {
-  "resumeText": "Full text of the resume...",
-  "jobDescription": "Job description text...",
-  "questionType": "behavioral|technical|mixed"
+  "resumeText": "Full text of the resume (required)",
+  "jobDescription": "Job description text (required)",
+  "questionType": "behavioral|technical|mixed (optional, default: mixed)"
 }
 ```
 
@@ -78,10 +74,10 @@ Generates tailored interview questions based on the resume and job description.
 {
   "questions": [
     {
-      "question": "Question text...",
-      "context": "Why this question is relevant...",
-      "goodAnswer": "What a good answer might include..."
-    },
+      "question": "Tell me about a time you had to solve a complex problem.",
+      "relevance": "Based on your project experience at Company X",
+      "goodAnswerTips": "Use the STAR method, focus on your specific contribution"
+    }
     // Additional questions...
   ]
 }
@@ -93,22 +89,22 @@ Generates tailored interview questions based on the resume and job description.
 - `400 Bad Request`: Missing required fields
 - `500 Internal Server Error`: Error processing request
 
-#### Mock Interview
+### Mock Interview
 
 ```
 POST /mock-interview
 ```
 
-Conducts a mock interview by providing feedback on user's answer to a question.
+Provides feedback on a user's interview response.
 
 **Request Body:**
 
 ```json
 {
-  "resumeText": "Full text of the resume...",
-  "jobDescription": "Job description text...",
-  "userResponse": "User's answer to the interview question...",
-  "questionContext": "The interview question that was asked..."
+  "resumeText": "Full text of the resume (optional)",
+  "jobDescription": "Job description text (optional)",
+  "userResponse": "User's answer to the interview question (required)",
+  "questionContext": "The interview question that was asked (required)"
 }
 ```
 
@@ -116,7 +112,12 @@ Conducts a mock interview by providing feedback on user's answer to a question.
 
 ```json
 {
-  "feedback": "Detailed feedback on the user's response..."
+  "feedback": {
+    "strengths": ["Good communication clarity", "Relevant example provided"],
+    "improvements": ["Could be more concise", "Add specific metrics"],
+    "rating": 4,
+    "suggestions": "Consider using the STAR method to structure your response"
+  }
 }
 ```
 
@@ -138,22 +139,8 @@ All error responses follow this format:
 
 ## Rate Limiting (Planned)
 
-API requests are limited to 100 requests per hour per user.
+API rate limiting will be implemented in a future release.
 
-Rate limit information is returned in the headers:
+## Data Retention
 
-```
-X-RateLimit-Limit: 100
-X-RateLimit-Remaining: 99
-X-RateLimit-Reset: 1620000000
-```
-
-## Versioning
-
-The API version is specified in the URL:
-
-```
-/api/v1/endpoint
-```
-
-Current version: v1
+User-submitted data is not currently stored beyond the session. Future releases with authentication will include data retention policies.
